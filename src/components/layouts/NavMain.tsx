@@ -26,11 +26,41 @@ export function NavMain() {
           <SidebarMenuButton tooltip="Home">
             <SquareTerminal />
             <Link to="/">
-              {" "}
               <span>Home</span>
             </Link>
           </SidebarMenuButton>
         </SidebarMenuItem>
+
+        {/* Home */}
+        <Collapsible asChild defaultOpen={false} className="group/collapsible">
+          <SidebarMenuItem>
+            <CollapsibleTrigger asChild>
+              <SidebarMenuButton tooltip="Expenses">
+                <PieChart />
+                <span>ToDo-Tasks</span>
+                <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+              </SidebarMenuButton>
+            </CollapsibleTrigger>
+            <CollapsibleContent>
+              <SidebarMenuSub>
+                <SidebarMenuSubItem>
+                  <SidebarMenuSubButton asChild>
+                    <Link to="/todo-new">
+                      <span>New Task</span>
+                    </Link>
+                  </SidebarMenuSubButton>
+                </SidebarMenuSubItem>
+                <SidebarMenuSubItem>
+                  <SidebarMenuSubButton asChild>
+                    <Link to="/todo">
+                      <span>All Tasks</span>
+                    </Link>
+                  </SidebarMenuSubButton>
+                </SidebarMenuSubItem>
+              </SidebarMenuSub>
+            </CollapsibleContent>
+          </SidebarMenuItem>
+        </Collapsible>
 
         {/* Dashboard */}
         <SidebarMenuItem>

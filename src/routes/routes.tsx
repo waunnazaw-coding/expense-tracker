@@ -12,6 +12,8 @@ import ExpenseNewPage from "@/pages/ExpenseNewPage";
 import ExpenseEditPage from "@/pages/ExpenseEditPage";
 import ProfilePage from "@/pages/ProfilePage";
 import SettingsPage from "@/pages/SettingsPage";
+import ToDoPage from "@/pages/ToDoPage";
+import ToDoNewPage from "@/pages/ToDoNewPage";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +36,14 @@ const router = createBrowserRouter([
       {
         path: "dashboard",
         element: withSuspense(<DashboardPage />),
+      },
+      {
+        path: "todo",
+        element: withSuspense(<ToDoPage />),
+      },
+      {
+        path: "todo-new",
+        element: withSuspense(<ToDoNewPage />),
       },
       {
         path: "expenses",
@@ -63,7 +73,6 @@ const router = createBrowserRouter([
     ],
   },
 
-  // Catch-all route redirecting to home
   {
     path: "*",
     element: <Navigate to="/" replace />,
