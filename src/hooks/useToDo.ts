@@ -15,28 +15,37 @@ import { useToDoStore } from "@/stores/todoStore";
 import { toast } from "sonner";
 import { useEffect } from "react";
 
-// Fetch paginated todos
-// Pagination hook: official style with placeholder data for smooth paging
-// export function useTodosPaged(pageNumber: number, pageSize: number) {
-//   const setPagedTodos = useToDoStore((state) => state.setPagedTodos);
+export function useTodosPaged(pageNumber: number, pageSize: number) {
+  const setPagedTodos = useToDoStore((state) => state.setPagedTodos);
 
-//   return useQuery<PagedTodosResponse, Error>({
-//     queryKey: ["todosPaged", pageNumber, pageSize],
-//     queryFn: () => fetchTodosPaged(pageNumber, pageSize),
-//     placeholderData: (prev) => prev, // Keeps previous page's data while loading
-//     staleTime: 5 * 60 * 1000,
-//     cacheTime: 10 * 60 * 1000,
-//     retry: 3,
-//     retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
-//     onSuccess: (data: any) => {
-//       setPagedTodos(data, pageNumber, pageSize);
-//     },
-//     onError: (error: any) => {
-//       toast.error(error.message || "Failed to fetch todos");
-//     },
-//   });
-// }
+  const query = useQuery<PagedTodosResponse, Error>({
+    queryKey: ["todosPaged", pageNumber, pageSize],
+    queryFn: () => fetchTodosPaged(pageNumber, pageSize),
+    placeholderData: (prev) => prev, // keeps previous page data while loading
+    staleTime: 5 * 60 * 1000, // 5 minutes
+    retry: 3,
+    retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
+  });
 
+  useEffect(() => {
+    if (query.isSuccess && query.data) {
+      setPagedTodos(query.data, pageNumber, pageSize);
+    }
+    if (query.isError && query.error) {
+      toast.error(query.error.message || "Failed to fetch todos");
+    }
+  }, [
+    query.isSuccess,
+    query.isError,
+    query.data,
+    query.error,
+    setPagedTodos,
+    pageNumber,
+    pageSize,
+  ]);
+
+  return query;
+}
 // Fetch all todos
 
 export function useTodos() {

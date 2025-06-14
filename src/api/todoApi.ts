@@ -35,17 +35,17 @@ export const fetchTodosPaged = async (
   pageSize: number,
 ): Promise<PagedTodosResponse> => {
   try {
-    const response = await axiosInstance.get<ApiResponse<PagedTodosResponse>>(
+    const response = await axiosInstance.get<PagedTodosResponse>(
       `/Task/paged`,
       {
         params: { pageNumber, pageSize },
       },
     );
 
-    console.log("Paged todos response:", response.data.data);
+    console.log("Paged todos response:", response.data);
 
     // Calculate totalPages if not provided by API
-    const data = response.data.data;
+    const data = response.data;
     const totalPages = Math.ceil(data.totalCount / pageSize);
 
     return {

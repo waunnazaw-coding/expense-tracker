@@ -4,6 +4,7 @@ import { useToDoStore } from "@/stores/todoStore";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { useNavigate } from "react-router-dom";
 
 export function AddNewTask() {
   const [title, setTitle] = useState("");
@@ -12,6 +13,7 @@ export function AddNewTask() {
   const [dueDate, setDueDate] = useState<string>("");
   const createTodoMutation = useCreateTodo();
   const addLocalTodo = useToDoStore((state) => state.addLocalTodo);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -19,9 +21,9 @@ export function AddNewTask() {
 
     const newTodo = {
       title,
-      description: description || null,
+      description: description ? description : undefined,
       isCompleted,
-      dueDate: dueDate ? new Date(dueDate).toISOString() : null,
+      dueDate: dueDate ? new Date(dueDate).toISOString() : undefined,
     };
 
     try {
@@ -31,6 +33,8 @@ export function AddNewTask() {
       setDescription("");
       setIsCompleted(false);
       setDueDate("");
+
+      navigate("/todo");
     } catch (error) {
       console.error("Failed to create todo", error);
     }
