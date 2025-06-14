@@ -57,6 +57,13 @@ export function NavMain() {
                     </Link>
                   </SidebarMenuSubButton>
                 </SidebarMenuSubItem>
+                <SidebarMenuSubItem>
+                  <SidebarMenuSubButton asChild>
+                    <Link to="/pagination-todo">
+                      <span>Pagination</span>
+                    </Link>
+                  </SidebarMenuSubButton>
+                </SidebarMenuSubItem>
               </SidebarMenuSub>
             </CollapsibleContent>
           </SidebarMenuItem>

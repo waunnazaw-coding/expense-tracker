@@ -14,6 +14,7 @@ import ProfilePage from "@/pages/ProfilePage";
 import SettingsPage from "@/pages/SettingsPage";
 import ToDoPage from "@/pages/ToDoPage";
 import ToDoNewPage from "@/pages/ToDoNewPage";
+import PagedToDoList from "@/components/todo/PageToDoListCard";
 
 const router = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
       {
         path: "todo-new",
         element: withSuspense(<ToDoNewPage />),
+      },
+      {
+        path: "pagination-todo",
+        element: withSuspense(<PagedToDoList />),
       },
       {
         path: "expenses",

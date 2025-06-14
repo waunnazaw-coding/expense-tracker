@@ -14,6 +14,7 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { Outlet } from "react-router-dom";
+import { Toaster } from "sonner";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const queryClient = new QueryClient();
@@ -48,6 +49,7 @@ export default function RootLayoutPage() {
           </header>
           <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
             <Outlet />
+            <Toaster position="top-right" />
           </div>
         </SidebarInset>
       </SidebarProvider>
