@@ -10,7 +10,6 @@ interface ToDoStore {
   totalCount: number;
   currentPage: number;
   pageSize: number;
-
   // State actions
   addLocalTodo: (todo: ToDoItem) => void;
   setTodos: (todos: ToDoItem[]) => void;
@@ -81,11 +80,11 @@ export const useToDoStore = create<ToDoStore>((set) => ({
       produce(state, (draft) => {
         // Remove from all todos
         draft.todos = draft.todos.filter((t) => t.taskId !== taskId);
-
         // Remove from paged todos and adjust total count
         const wasInPaged = draft.pagedTodos.some((t) => t.taskId === taskId);
         draft.pagedTodos = draft.pagedTodos.filter((t) => t.taskId !== taskId);
         if (wasInPaged) draft.totalCount = Math.max(draft.totalCount - 1, 0);
       }),
     ),
+  //test
 }));

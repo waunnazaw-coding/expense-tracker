@@ -67,6 +67,7 @@ export function useTodos() {
 
   return query;
 }
+
 // Create a new todo
 export function useCreateTodo() {
   const queryClient = useQueryClient();
